@@ -1,0 +1,39 @@
+# Synthetic example policy. Amounts are in major units of base_currency.
+version: "2026.2"
+base_currency: USD
+
+# Maximum total per expense, by category.
+category_limits:
+  meals: 200.00
+  lodging: 350.00
+  transport: 120.00
+  airfare: 900.00
+  office_supplies: 150.00
+  software: 300.00
+  entertainment: 250.00
+  other: 100.00
+
+# Maximum meal spend per person (total / max(attendees, 1)).
+per_diem:
+  meals: 60.00
+
+# Documents above this amount must be an itemized receipt or an invoice.
+receipt_required_above: 25.00
+
+# Meals and entertainment above this amount must name attendees.
+attendees_required:
+  above: 25.00
+  categories: [meals, entertainment]
+
+# Expenses on Saturday or Sunday in these categories need a justification.
+weekend_review_categories: [meals, entertainment]
+
+# warn or violation.
+alcohol: violation
+
+# Transactions older than this are violations.
+max_age_days: 90
+
+review:
+  # Any field below this confidence sends the record to a human.
+  min_confidence: 0.70
