@@ -1,0 +1,7 @@
+Sunny Side Diner
+Jun 13, 2026
+Pancake stack      9.50
+Coffee             3.00
+Eggs and toast     5.70
+Total            $18.20
+Paid cash

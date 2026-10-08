@@ -1,0 +1,9 @@
+Casa Lucia Restaurant
+2026-06-16
+Pasta Pomodoro    22.00
+Glass of wine     11.00
+Subtotal          33.00
+Tax                2.50
+Total            $35.50
+Guests: Dana Cole
+Visa ****7007

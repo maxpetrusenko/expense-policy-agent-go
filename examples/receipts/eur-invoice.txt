@@ -1,0 +1,7 @@
+INVOICE #88213
+From: Northwind Cloud Inc
+Issued 12 May 2026
+Team subscription - 5 seats   250.00
+VAT 20%                        50.00
+Total due EUR 300.00
+Payment: wire transfer

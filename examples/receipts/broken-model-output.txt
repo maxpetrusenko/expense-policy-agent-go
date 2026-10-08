@@ -1,0 +1,2 @@
+Test hook: the mock provider returns schema-violating JSON for this document.
+<<MOCK:schema-violation>>

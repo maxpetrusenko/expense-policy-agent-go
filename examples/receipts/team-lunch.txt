@@ -1,0 +1,12 @@
+Harbor Grill Restaurant
+Date: 2026-06-09
+Burger Plate      18.00
+Fish Tacos        16.00
+Chicken Bowl      15.00
+Sparkling water    9.00
+Sides             25.00
+Subtotal          83.00
+Tax                6.64
+Total            $89.64
+Guests: Ana Ruiz, Ben Okoye and Cy Tran
+VISA ****1111
