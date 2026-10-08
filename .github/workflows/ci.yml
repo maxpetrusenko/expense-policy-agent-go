@@ -1,0 +1,32 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: build
+        run: go build ./...
+      - name: vet
+        run: go vet ./...
+      - name: gofmt
+        run: test -z "$(gofmt -l .)"
+      - name: test
+        run: go test -race ./...
+      - name: eval gate (mock provider, candidate v2 against baseline v1)
+        run: go run ./cmd/eval -prompts v1,v2
+      - name: eval gate rejects a regression (v1 as candidate must fail)
+        run: |
+          if go run ./cmd/eval -prompts v2,v1 > /dev/null; then
+            echo "gate accepted a worse prompt"; exit 1
+          fi
