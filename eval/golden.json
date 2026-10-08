@@ -1,0 +1,546 @@
+{
+ "description": "Synthetic receipts. No real merchants, people, or card numbers. Evaluated at now=2026-06-30.",
+ "now": "2026-06-30",
+ "cases": [
+  {
+   "id": "r01",
+   "note": "clean coffee",
+   "text": "BLUE HERON CAFE\n418 Market Street\nDate: 2026-06-02\n1 Latte            4.50\n1 Bagel            3.75\nSubtotal           8.25\nTax                0.66\nTotal             $8.91\nVISA ****4242",
+   "expected": {
+    "merchant": "BLUE HERON CAFE",
+    "date": "2026-06-02",
+    "amount": "8.91",
+    "currency": "USD",
+    "category": "meals",
+    "tax": "0.66",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r02",
+   "note": "team lunch, attendees listed, within per diem",
+   "text": "Harbor Grill Restaurant\nDate: 2026-06-09\nBurger Plate      18.00\nFish Tacos        16.00\nChicken Bowl      15.00\nSparkling water    9.00\nSides             25.00\nSubtotal          83.00\nTax                6.64\nTotal            $89.64\nGuests: Ana Ruiz, Ben Okoye and Cy Tran\nVISA ****1111",
+   "expected": {
+    "merchant": "Harbor Grill Restaurant",
+    "date": "2026-06-09",
+    "amount": "89.64",
+    "currency": "USD",
+    "category": "meals",
+    "tax": "6.64",
+    "attendees": [
+     "Ana Ruiz",
+     "Ben Okoye",
+     "Cy Tran"
+    ],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r03",
+   "note": "dinner for two over the 60 per person per diem",
+   "text": "Marlow Bistro & Kitchen\nDate: 2026-06-11\nTasting menu x2   120.00\nDessert            12.00\nSubtotal          132.00\nTax                10.00\nTotal            $142.00\nParty: Priya Nair, Tom Weiss\nMASTERCARD ****5521",
+   "expected": {
+    "merchant": "Marlow Bistro & Kitchen",
+    "date": "2026-06-11",
+    "amount": "142.00",
+    "currency": "USD",
+    "category": "meals",
+    "tax": "10.00",
+    "attendees": [
+     "Priya Nair",
+     "Tom Weiss"
+    ],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "PER_DIEM"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r04",
+   "note": "solo dinner with wine",
+   "text": "Casa Lucia Restaurant\n2026-06-16\nPasta Pomodoro    22.00\nGlass of wine     11.00\nSubtotal          33.00\nTax                2.50\nTotal            $35.50\nGuests: Dana Cole\nVisa ****7007",
+   "expected": {
+    "merchant": "Casa Lucia Restaurant",
+    "date": "2026-06-16",
+    "amount": "35.50",
+    "currency": "USD",
+    "category": "meals",
+    "tax": "2.50",
+    "attendees": [
+     "Dana Cole"
+    ],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "ALCOHOL"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r05",
+   "note": "Saturday breakfast, named-month date",
+   "text": "Sunny Side Diner\nJun 13, 2026\nPancake stack      9.50\nCoffee             3.00\nEggs and toast     5.70\nTotal            $18.20\nPaid cash",
+   "expected": {
+    "merchant": "Sunny Side Diner",
+    "date": "2026-06-13",
+    "amount": "18.20",
+    "currency": "USD",
+    "category": "meals",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "cash"
+   },
+   "policy": {
+    "decision": "warn",
+    "rules": [
+     "WEEKEND"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r06",
+   "note": "hotel stay within limit",
+   "text": "Lakeside Hotel & Suites\nDate: 2026-06-17\nRoom charge, 1 night   189.00\nTax                     22.68\nTotal                 $211.68\nMASTERCARD ****8800",
+   "expected": {
+    "merchant": "Lakeside Hotel & Suites",
+    "date": "2026-06-17",
+    "amount": "211.68",
+    "currency": "USD",
+    "category": "lodging",
+    "tax": "22.68",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r07",
+   "note": "two nights over the 350 lodging limit",
+   "text": "Grand Meridian Resort\nDate: 2026-06-04\nRoom charge, 2 nights   420.00\nSubtotal                420.00\nTax                      58.30\nTotal                  $478.30\nVisa ****3141",
+   "expected": {
+    "merchant": "Grand Meridian Resort",
+    "date": "2026-06-04",
+    "amount": "478.30",
+    "currency": "USD",
+    "category": "lodging",
+    "tax": "58.30",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "CATEGORY_LIMIT"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r08",
+   "note": "taxi paid in cash",
+   "text": "CITY TAXI CO\nMetro Airport to Downtown\nDate: 2026-06-08\nFare              34.50\nTip                5.00\nTotal            $39.50\nPaid: Cash",
+   "expected": {
+    "merchant": "CITY TAXI CO",
+    "date": "2026-06-08",
+    "amount": "39.50",
+    "currency": "USD",
+    "category": "transport",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "cash"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r09",
+   "note": "economy flight under the limit",
+   "text": "Northern Airlines\nE-TICKET RECEIPT\nFlight NA 214  2026-05-20\nFare             571.20\nTax               41.20\nTotal        USD 612.40\nVISA ****0099",
+   "expected": {
+    "merchant": "Northern Airlines",
+    "date": "2026-05-20",
+    "amount": "612.40",
+    "currency": "USD",
+    "category": "airfare",
+    "tax": "41.20",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r10",
+   "note": "flight over the 900 airfare limit",
+   "text": "Pacific Air Lines\nBoarding pass receipt\nFlight PA 77   2026-05-28\nFare           1,170.00\nTax              114.00\nTotal         $1,284.00\nVisa ****2468",
+   "expected": {
+    "merchant": "Pacific Air Lines",
+    "date": "2026-05-28",
+    "amount": "1284.00",
+    "currency": "USD",
+    "category": "airfare",
+    "tax": "114.00",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "CATEGORY_LIMIT"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r11",
+   "note": "EUR invoice with VAT, wire transfer",
+   "text": "INVOICE #88213\nFrom: Northwind Cloud Inc\nIssued 12 May 2026\nTeam subscription - 5 seats   250.00\nVAT 20%                        50.00\nTotal due EUR 300.00\nPayment: wire transfer",
+   "expected": {
+    "merchant": "Northwind Cloud Inc",
+    "date": "2026-05-12",
+    "amount": "300.00",
+    "currency": "EUR",
+    "category": "software",
+    "tax": "50.00",
+    "attendees": [],
+    "payment_method": "other"
+   },
+   "policy": {
+    "decision": "warn",
+    "rules": [
+     "FX_REVIEW"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r12",
+   "note": "monthly hosting under the software limit",
+   "text": "Relay Hosting Co.\nDate: 2026-06-03\nMonthly hosting plan, 1 license   $49.00\nTotal                             $49.00\nPaid by Visa",
+   "expected": {
+    "merchant": "Relay Hosting Co.",
+    "date": "2026-06-03",
+    "amount": "49.00",
+    "currency": "USD",
+    "category": "software",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r13",
+   "note": "printer paper and toner, slash date with day over 12",
+   "text": "Staples #0412\n06/22/2026\nToner cartridge       61.30\nPrinter paper         20.00\nSubtotal              81.30\nSales Tax 7.8%         6.35\nTotal                $87.65\nVisa ****1212",
+   "expected": {
+    "merchant": "Staples #0412",
+    "date": "2026-06-22",
+    "amount": "87.65",
+    "currency": "USD",
+    "category": "office_supplies",
+    "tax": "6.35",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r14",
+   "note": "stationery over the 150 limit",
+   "text": "Office Depot\nDate: 2026-06-01\nNotebooks x20          96.00\nToner x2              100.00\nStationery set         16.20\nTotal                $212.30\nAMEX ****9001",
+   "expected": {
+    "merchant": "Office Depot",
+    "date": "2026-06-01",
+    "amount": "212.30",
+    "currency": "USD",
+    "category": "office_supplies",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "CATEGORY_LIMIT"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r15",
+   "note": "concert tickets with no attendees named",
+   "text": "Riverside Theater\nConcert tickets x4   160.00\nDate: 2026-06-18\nTotal               $160.00\nAMEX ****4455",
+   "expected": {
+    "merchant": "Riverside Theater",
+    "date": "2026-06-18",
+    "amount": "160.00",
+    "currency": "USD",
+    "category": "entertainment",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "ATTENDEES_REQUIRED"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r16",
+   "note": "bare card slip above the receipt threshold",
+   "text": "ELM STREET PIZZA CAFE\nCARD SLIP - MERCHANT COPY\nApproval code: 884412\nDate: 2026-06-05\nVISA ****0042\nTotal $58.00",
+   "expected": {
+    "merchant": "ELM STREET PIZZA CAFE",
+    "date": "2026-06-05",
+    "amount": "58.00",
+    "currency": "USD",
+    "category": "meals",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "ATTENDEES_REQUIRED",
+     "RECEIPT_REQUIRED"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r17",
+   "note": "GBP receipt, dotted date",
+   "text": "Copper Kettle Cafe\n14.05.2026\nLunch set        £19.50\nTotal            £23.40\nVAT 20%           3.90\nVISA contactless",
+   "expected": {
+    "merchant": "Copper Kettle Cafe",
+    "date": "2026-05-14",
+    "amount": "23.40",
+    "currency": "GBP",
+    "category": "meals",
+    "tax": "3.90",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "warn",
+    "rules": [
+     "FX_REVIEW"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r18",
+   "note": "parking receipt older than 90 days",
+   "text": "Metro Parking Garage\nDate: 2026-02-10\nParking, 6 hours   22.00\nTotal             $22.00\nCash",
+   "expected": {
+    "merchant": "Metro Parking Garage",
+    "date": "2026-02-10",
+    "amount": "22.00",
+    "currency": "USD",
+    "category": "transport",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "cash"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "EXPENSE_TOO_OLD"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r19",
+   "note": "day/month ambiguity: truth is 4 May (DD/MM)",
+   "text": "Daily Grind Coffee Cafe\n04/05/2026\nFlat white     4.00\nMuffin         2.50\nTotal         $6.50\nCash",
+   "expected": {
+    "merchant": "Daily Grind Coffee Cafe",
+    "date": "2026-05-04",
+    "amount": "6.50",
+    "currency": "USD",
+    "category": "meals",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "cash"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r20",
+   "note": "no total label, supermarket snacks for a team event",
+   "text": "SUPERMART 114\nTea bags         12.99\nShortbread       18.46\nPAID VISA        31.45\nDate: 2026-06-15",
+   "expected": {
+    "merchant": "SUPERMART 114",
+    "date": "2026-06-15",
+    "amount": "31.45",
+    "currency": "USD",
+    "category": "meals",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "ATTENDEES_REQUIRED"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r21",
+   "note": "rideshare with tip",
+   "text": "UBER TRIP - Rideshare\nDate: 2026-06-12\nTrip fare       18.20\nTip              3.00\nTotal          $21.20\nPaid with Visa ****9911",
+   "expected": {
+    "merchant": "UBER TRIP - Rideshare",
+    "date": "2026-06-12",
+    "amount": "21.20",
+    "currency": "USD",
+    "category": "transport",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "pass",
+    "rules": []
+   },
+   "needs_review": false
+  },
+  {
+   "id": "r22",
+   "note": "team dinner: alcohol, Saturday, over limit and per diem",
+   "text": "Bellini's Bar & Grill\nDate: 2026-06-20\nDinner for 4      190.00\nCocktails x4       72.00\nBeer pitcher       24.00\nSubtotal          286.00\nTax                24.00\nTotal            $310.00\nGuests: Ana Ruiz, Ben Okoye, Cy Tran and Dee Park\nAMEX ****3005",
+   "expected": {
+    "merchant": "Bellini's Bar & Grill",
+    "date": "2026-06-20",
+    "amount": "310.00",
+    "currency": "USD",
+    "category": "meals",
+    "tax": "24.00",
+    "attendees": [
+     "Ana Ruiz",
+     "Ben Okoye",
+     "Cy Tran",
+     "Dee Park"
+    ],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "ALCOHOL",
+     "CATEGORY_LIMIT",
+     "PER_DIEM",
+     "WEEKEND"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r23",
+   "note": "lunch above 25 with no attendees",
+   "text": "Fresh Cafe\nDate: 2026-06-23\nLunch combo       27.00\nSoup               4.00\nTotal            $31.00\nPaid cash",
+   "expected": {
+    "merchant": "Fresh Cafe",
+    "date": "2026-06-23",
+    "amount": "31.00",
+    "currency": "USD",
+    "category": "meals",
+    "tax": null,
+    "attendees": [],
+    "payment_method": "cash"
+   },
+   "policy": {
+    "decision": "violation",
+    "rules": [
+     "ATTENDEES_REQUIRED"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r24",
+   "note": "EUR cafe receipt with decimal commas",
+   "text": "Cafe Central\n12.05.2026\nEspresso      3,40\nLunch plate  11,40\nTotal EUR    14,80\nVAT 19%       2,36\nMASTERCARD ****7788",
+   "expected": {
+    "merchant": "Cafe Central",
+    "date": "2026-05-12",
+    "amount": "14.80",
+    "currency": "EUR",
+    "category": "meals",
+    "tax": "2.36",
+    "attendees": [],
+    "payment_method": "card"
+   },
+   "policy": {
+    "decision": "warn",
+    "rules": [
+     "FX_REVIEW"
+    ]
+   },
+   "needs_review": true
+  },
+  {
+   "id": "r25",
+   "note": "handwritten note with no printed total",
+   "text": "Lunch w/ client\nPaid 45 cash\nthx",
+   "expect_failure": "invalid_document"
+  },
+  {
+   "id": "r26",
+   "note": "blank scan",
+   "text": "[page intentionally left blank]",
+   "expect_failure": "invalid_document"
+  }
+ ]
+}
