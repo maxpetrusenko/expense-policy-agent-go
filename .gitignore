@@ -1,0 +1,6 @@
+.expense-state/
+*.test
+*.out
+.env
+.env.*
+.DS_Store
